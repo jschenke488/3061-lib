@@ -13,9 +13,9 @@ jobs:
     steps:
       - name: Run a multi-line script
         run: |
-          apt-get update -y && apt-get install openssh-client -y
-          apt install git -y
-          apt install curl -y
+          sudo apt-get update -y && sudo apt-get install openssh-client -y
+          sudo apt install git -y
+          sudo apt install curl -y
           eval $(ssh-agent -s)
           echo ${{ secrets.SSH_KEY }} | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
