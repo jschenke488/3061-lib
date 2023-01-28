@@ -16,6 +16,7 @@ jobs:
           sudo apt-get update -y && sudo apt-get install openssh-client -y
           sudo apt install git -y
           sudo apt install curl -y
+          sudo apt install coreutils -y
           eval $(ssh-agent -s)
           echo ${{ secrets.SSH_KEY }} | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
