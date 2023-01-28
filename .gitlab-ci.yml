@@ -1,6 +1,6 @@
 stages:
   - hehe
-mirror-from-external:
+hehe:
     stage: hehe
     image: ubuntu:18.04
     before_script:
