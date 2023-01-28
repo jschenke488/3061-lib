@@ -8,27 +8,16 @@ on:
 jobs:
   hehe:
     runs-on: ubuntu-latest
-    if: github.repository == 'cursed-git/3061-lib'
+    if: github.repository == 'FRCTeam1987/3061-lib'
 
     steps:
       - name: Run a multi-line script
         run: |
-          sudo apt-get update -y && sudo apt-get install openssh-client -y
-          sudo apt install git -y
-          sudo apt install curl -y
-          sudo apt install coreutils -y
-          eval $(ssh-agent -s)
-          echo ${{ secrets.SSH_KEY }} | tr -d '\r' | ssh-add -
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
           git config --global user.name "Jay"
           git config --global user.email "jschenke488@lsr7.net"
-          ssh "git@github.com"
           git clone --mirror https://github.com/jschenke488/3061-lib 3061-lib
           cd 3061-lib
           git remote remove origin
-          git remote add origin https://jschenke488:${{ secrets.GIT_TOKEN }}@github.com/cursed-git/3061-lib
+          git remote add origin https://jschenke488:${{ secrets.GIT_TOKEN }}@github.com/FRCTeam1987/3061-lib
           git push -f --prune --all
           git push -f --prune --tag
