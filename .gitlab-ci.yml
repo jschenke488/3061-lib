@@ -1,0 +1,30 @@
+stages:
+  - hehe
+mirror-from-external:
+    stage: hehe
+    image: ubuntu:18.04
+    before_script:
+    - apt-get update -y && apt-get install openssh-client -y
+    - apt install git -y
+    - apt install curl -y
+    - eval $(ssh-agent -s)
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - cat ./.secure_files/id_ed25519 | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - git config --global user.name "Jay"
+    - git config --global user.email "jay@pqtato.pw"
+    - ssh "git@gitlab.com"
+    script:
+    - git clone --mirror https://github.com/HuskieRobotics/3061-lib 3061-lib
+    - cd 3061-lib
+    - git remote remove origin
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - git remote add origin https://jschenke:$(cat ./.secure_files/gitlab_token)@gitlab.com/frcteam1987/3061-lib
+    - rm -rf ./.secure_files/
+    - git push -f --prune --all
+    - git push -f --prune --tag
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "schedule"
