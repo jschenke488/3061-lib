@@ -18,7 +18,7 @@ mirror-from-external:
     - git config --global user.email "jay@pqtato.pw"
     - ssh "git@gitlab.com"
     script:
-    - git clone --mirror https://github.com/HuskieRobotics/3061-lib 3061-lib
+    - git clone --mirror https://github.com/jschenke488/3061-lib 3061-lib
     - cd 3061-lib
     - git remote remove origin
     - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
