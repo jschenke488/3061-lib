@@ -19,5 +19,6 @@ jobs:
           cd 3061-lib
           git remote remove origin
           git remote add origin https://jschenke488:${{ secrets.GIT_TOKEN }}@github.com/FRCTeam1987/3061-lib
+          git branch -d main
           git push -f --prune --all
           git push -f --prune --tag
